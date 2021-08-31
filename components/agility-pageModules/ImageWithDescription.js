@@ -10,8 +10,6 @@ const ImageWithDescription = (props) => {
   const { fields } = module;
   const { image } = fields;
 
-  console.log('items ', cardItems);
-
   return (
     <div>
       <img src={image.url} />

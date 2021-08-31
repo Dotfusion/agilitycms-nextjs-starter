@@ -9,6 +9,7 @@ module.exports = {
         md: "1200px",
         lg: "1200px",
         xl: "1200px",
+        xxl:  "2400px"
       },
     },
     fontFamily: {
