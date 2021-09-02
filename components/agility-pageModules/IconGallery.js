@@ -4,25 +4,54 @@ import { renderHTML } from "@agility/nextjs";
 const IconGallery = ({ module, customData }) => {
   // get module fields
   const { fields } = module;
-  console.log('m', module)
-  console.log('icons ', customData.icons);
 
+  console.log("icons", customData.icons);
+  console.log("fields", fields);
   return (
     <>
-      <div className="relative">
+      <div className="flex flex-row flex-wrap px-20 md:px-40">
         {!!customData &&
-          customData.icons.map((iconItem, index) => {
-            return (<div key={index}>
-              <img
-                src={iconItem?.fields?.iconImage?.url}
-                alt={iconItem.fields.heading}
-                className="max-h-screen min-w-full bg-fixed bg-center bg-cover"
-              />
-              <div className="absolute text-white left-1/4 top-1/3">
-                <p className="text-2xl">{iconItem.fields.description}</p>
-                <h1>{iconItem.fields.heading}</h1>
+          customData.icons.map((item, index) => {
+            return (
+              <div
+                className={`w-full m-auto
+                ${
+                  fields?.iconOrientation == 3
+                    ? "md:w-4/12 px-12 py-24"
+                    : fields?.iconOrientation == 8
+                    ? "md:w-6/12 lg:w-3/12 px-6 py-10"
+                    : "md:w-full"
+                }
+                `}
+                key={index}
+              >
+                <div
+                  className={`flex ${
+                    fields?.iconOrientation == 3
+                      ? ""
+                      : fields?.iconOrientation == 8
+                      ? "justify-center"
+                      : ""
+                  }`}
+                >
+                  <img
+                    className={`flex ${
+                      fields?.iconOrientation == 3
+                        ? ""
+                        : fields?.iconOrientation == 8
+                        ? "w-full px-8 justify-center"
+                        : ""
+                    }`}
+                    src={item?.fields?.iconImage.url}
+                    alt={item?.fields?.heading}
+                  />
+                </div>
+                <div className="text-black">
+                  <h1>{item?.fields?.heading}</h1>
+                  <h1>{item?.fields?.description}</h1>
+                </div>
               </div>
-            </div>)
+            );
           })}
       </div>
     </>
